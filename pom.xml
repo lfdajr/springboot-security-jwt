@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>springboot-security-jwt</name>
-    <description>Secure your API with JWT Tokens</description>
+    <description>Boilerplate code for Spring Boot Security - Jwt</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
