@@ -1,3 +1,3 @@
 # springboot-security-jwt
 
-Boilerplate for Spring Boot - JWT
+Boilerplate for Spring Boot Security - JWT
