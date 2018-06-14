@@ -22,15 +22,9 @@ import com.svlada.security.model.UserContext;
 import com.svlada.security.model.token.JwtToken;
 import com.svlada.security.model.token.JwtTokenFactory;
 
-/**
- * AjaxAwareAuthenticationSuccessHandler
- * 
- * @author vladimir.stankovic
- *
- *         Aug 3, 2016
- */
 @Component
 public class AjaxAwareAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+
     private final ObjectMapper mapper;
     private final JwtTokenFactory tokenFactory;
 
@@ -44,10 +38,10 @@ public class AjaxAwareAuthenticationSuccessHandler implements AuthenticationSucc
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
         UserContext userContext = (UserContext) authentication.getPrincipal();
-        
+
         JwtToken accessToken = tokenFactory.createAccessJwtToken(userContext);
         JwtToken refreshToken = tokenFactory.createRefreshToken(userContext);
-        
+
         Map<String, String> tokenMap = new HashMap<String, String>();
         tokenMap.put("token", accessToken.getToken());
         tokenMap.put("refreshToken", refreshToken.getToken());
@@ -62,7 +56,7 @@ public class AjaxAwareAuthenticationSuccessHandler implements AuthenticationSucc
     /**
      * Removes temporary authentication-related data which may have been stored
      * in the session during the authentication process..
-     * 
+     *
      */
     protected final void clearAuthenticationAttributes(HttpServletRequest request) {
         HttpSession session = request.getSession(false);

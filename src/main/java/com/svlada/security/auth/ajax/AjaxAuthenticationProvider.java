@@ -21,14 +21,9 @@ import com.svlada.entity.User;
 import com.svlada.security.model.UserContext;
 import com.svlada.user.service.DatabaseUserService;
 
-/**
- * 
- * @author vladimir.stankovic
- *
- * Aug 3, 2016
- */
 @Component
 public class AjaxAuthenticationProvider implements AuthenticationProvider {
+
     private final BCryptPasswordEncoder encoder;
     private final DatabaseUserService userService;
 
@@ -46,19 +41,21 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider {
         String password = (String) authentication.getCredentials();
 
         User user = userService.getByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
-        
+
         if (!encoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Authentication Failed. Username or Password not valid.");
         }
 
-        if (user.getRoles() == null) throw new InsufficientAuthenticationException("User has no roles assigned");
-        
+        if (user.getRoles() == null) {
+            throw new InsufficientAuthenticationException("User has no roles assigned");
+        }
+
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getRole().authority()))
                 .collect(Collectors.toList());
-        
+
         UserContext userContext = UserContext.create(user.getUsername(), authorities);
-        
+
         return new UsernamePasswordAuthenticationToken(userContext, null, userContext.getAuthorities());
     }
 

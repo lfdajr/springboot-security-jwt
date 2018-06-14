@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 /**
  * Sample application for demonstrating security with JWT Tokens
- * 
+ *
  * @author vladimir.stankovic
  *
  * Aug 3, 2016
@@ -14,7 +14,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @SpringBootApplication
 @EnableConfigurationProperties
 public class SpringbootSecurityJwtApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(SpringbootSecurityJwtApplication.class, args);
-	}
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringbootSecurityJwtApplication.class, args);
+    }
 }

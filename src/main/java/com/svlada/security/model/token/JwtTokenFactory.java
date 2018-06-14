@@ -19,13 +19,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-/**
- * Factory class that should be always used to create {@link JwtToken}.
- *
- * @author vladimir.stankovic
- *
- * May 31, 2016
- */
 @Component
 public class JwtTokenFactory {
 
