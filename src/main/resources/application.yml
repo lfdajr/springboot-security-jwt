@@ -1,17 +1,17 @@
 server.port: 9966
 spring.profiles: default
-demo.security.jwt:
+br.com.campusbase.security.jwt:
   tokenExpirationTime: 15 # Number of minutes
   refreshTokenExpTime: 60 # Minutes
-  tokenIssuer: http://svlada.com
+  tokenIssuer: http://campusbase.com.br
   tokenSigningKey: xm8EV6Hy5RMFK4EEACIDAwQus
   
 spring.datasource:
-  url: "jdbc:h2:mem:testdb"
-  driverClassName: org.h2.Driver
-  username: sa
-  password: ""
-  data: "classpath*:data.sql"
-spring.jpa:
-  database-platform: org.hibernate.dialect.H2Dialect
-spring.h2.console.enabled: true
+  url: jdbc:mysql://localhost/miniversity28
+  driverClassName: com.mysql.jdbc.Driver
+  username: root
+  password: root
+spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+spring.jpa.hibernate.ddl-auto: none
+spring.jpa.hibernate.show-sql: true
+spring.jpa.hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

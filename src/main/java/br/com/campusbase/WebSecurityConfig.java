@@ -1,4 +1,4 @@
-package com.svlada.security.config;
+package br.com.campusbase;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,16 +25,11 @@ import com.svlada.security.auth.jwt.JwtAuthenticationProvider;
 import com.svlada.security.auth.jwt.JwtTokenAuthenticationProcessingFilter;
 import com.svlada.security.auth.jwt.SkipPathRequestMatcher;
 import com.svlada.security.auth.jwt.extractor.TokenExtractor;
+import org.springframework.context.annotation.ComponentScan;
 
-/**
- * WebSecurityConfig
- * 
- * @author vladimir.stankovic
- *
- * Aug 3, 2016
- */
 @Configuration
 @EnableWebSecurity
+@ComponentScan(basePackages = { "com.svlada.security" })
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String AUTHENTICATION_HEADER_NAME = "Authorization";
     public static final String AUTHENTICATION_URL = "/api/auth/login";

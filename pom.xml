@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.svlada</groupId>
+    <groupId>br.com.campusbase</groupId>
     <artifactId>jwt-demo</artifactId>
     <version>1</version>
     <packaging>jar</packaging>
 
-    <name>springboot-security-jwt</name>
-    <description>Boilerplate code for Spring Boot Security - Jwt</description>
+    <name>CampusBase</name>
+    <description>Organize suas aulas na web</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -71,8 +71,8 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
     </dependencies>
 

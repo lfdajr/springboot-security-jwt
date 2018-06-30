@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.svlada.entity.User;
-import com.svlada.security.UserService;
 import com.svlada.security.auth.jwt.extractor.TokenExtractor;
 import com.svlada.security.auth.jwt.verifier.TokenVerifier;
 import com.svlada.security.config.JwtSettings;
-import com.svlada.security.config.WebSecurityConfig;
+import br.com.campusbase.WebSecurityConfig;
+import br.com.campusbase.model.Usuario;
+import br.com.campusbase.service.UsuarioService;
 import com.svlada.security.exceptions.InvalidJwtToken;
 import com.svlada.security.model.UserContext;
 import com.svlada.security.model.token.JwtToken;
@@ -45,7 +45,7 @@ import com.svlada.security.model.token.RefreshToken;
 public class RefreshTokenEndpoint {
     @Autowired private JwtTokenFactory tokenFactory;
     @Autowired private JwtSettings jwtSettings;
-    @Autowired private UserService userService;
+    @Autowired private UsuarioService userService;
     @Autowired private TokenVerifier tokenVerifier;
     @Autowired @Qualifier("jwtHeaderTokenExtractor") private TokenExtractor tokenExtractor;
     
@@ -62,14 +62,12 @@ public class RefreshTokenEndpoint {
         }
 
         String subject = refreshToken.getSubject();
-        User user = userService.getByUsername(subject).orElseThrow(() -> new UsernameNotFoundException("User not found: " + subject));
+        Usuario user = userService.getByUsername(subject).orElseThrow(() -> new UsernameNotFoundException("User not found: " + subject));
 
-        if (user.getRoles() == null) throw new InsufficientAuthenticationException("User has no roles assigned");
-        List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.getRole().authority()))
-                .collect(Collectors.toList());
+        //if (user.getRoles() == null) throw new InsufficientAuthenticationException("User has no roles assigned");
+        List<GrantedAuthority> authorities = null;
 
-        UserContext userContext = UserContext.create(user.getUsername(), authorities);
+        UserContext userContext = UserContext.create(user.getEmail(), authorities);
 
         return tokenFactory.createAccessJwtToken(userContext);
     }

@@ -18,7 +18,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import com.svlada.security.auth.JwtAuthenticationToken;
 import com.svlada.security.auth.jwt.extractor.TokenExtractor;
-import com.svlada.security.config.WebSecurityConfig;
+import br.com.campusbase.WebSecurityConfig;
 import com.svlada.security.model.token.RawAccessJwtToken;
 
 /**
