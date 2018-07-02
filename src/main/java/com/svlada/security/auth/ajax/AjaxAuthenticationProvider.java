@@ -17,6 +17,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import com.svlada.security.model.UserContext;
+import java.util.Arrays;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Component
 public class AjaxAuthenticationProvider implements AuthenticationProvider {
@@ -47,9 +49,9 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider {
             throw new InsufficientAuthenticationException("User has no roles assigned");
         }*/
 
-        List<GrantedAuthority> authorities = null;
+        List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("USUARIO"));
 
-        UserContext userContext = UserContext.create(user.getEmail(), authorities);
+        UserContext userContext = UserContext.create(user.getNome(), user.getEmail(), user.getId(), authorities);
 
         return new UsernamePasswordAuthenticationToken(userContext, null, userContext.getAuthorities());
     }

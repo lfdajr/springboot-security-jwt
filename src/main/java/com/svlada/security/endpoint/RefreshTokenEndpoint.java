@@ -33,6 +33,7 @@ import com.svlada.security.model.token.JwtToken;
 import com.svlada.security.model.token.JwtTokenFactory;
 import com.svlada.security.model.token.RawAccessJwtToken;
 import com.svlada.security.model.token.RefreshToken;
+import java.util.Arrays;
 
 /**
  * RefreshTokenEndpoint
@@ -65,9 +66,9 @@ public class RefreshTokenEndpoint {
         Usuario user = userService.getByUsername(subject).orElseThrow(() -> new UsernameNotFoundException("User not found: " + subject));
 
         //if (user.getRoles() == null) throw new InsufficientAuthenticationException("User has no roles assigned");
-        List<GrantedAuthority> authorities = null;
+        List<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("USUARIO"));
 
-        UserContext userContext = UserContext.create(user.getEmail(), authorities);
+        UserContext userContext = UserContext.create(user.getNome(), user.getEmail(), user.getId(), authorities);
 
         return tokenFactory.createAccessJwtToken(userContext);
     }
